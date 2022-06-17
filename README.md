@@ -1,2 +1,2 @@
 # VACourceTests
-VACourceTests is a storage place for learning cource data on Vanessa Autonation tech
+VACourceTests is a storage place for learning cource data on Vanessa Automation tech
