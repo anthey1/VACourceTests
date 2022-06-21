@@ -1,0 +1,55 @@
+2. Разберитесь в причинах падения тестов сборки номер 2862 – проверка функционала линковки строк. Ссылка на сборку – https://dev.irpteam.com/tc/buildConfiguration/IRP_RunVA/26984?buildTab=artifacts#%2Fallure-report.zip. В качестве отчета пришлите файл с описанными причинами падения тестов. 
+ 
+Описание причин падения тестов TC.
+
+Так как по данной ссылке Allure  отчеты не формируются - анализ делал по логам выполнения тестов... Поэтому не все причины, которые приводили к падению тестов на 100% корректные, так как нет понимания "контекста" выполнения (например, скриншотов, которые были доступны в Allure отчете)...
+
+---------------
+1. Тест не смог открыть документ Заказ Клиента на группе шагом 1614.
+(Step (Given I open hyperlink "e1cib/list/Document.SalesOrder") has not been executed. The line of the tree #1614)
+
+ - Случилось это при заполнении данными документа "Счета"
+(Errors occurred upon checking data population - 'Purchase invoice 2 dated 22.07.2021 09:38:02')
+----------------
+2. При переходе в строку таблицы "BasisesTree" ожидалось обнаружить значение в колонке "Количество" = 7, но после перехода на строку в этой строке (в ячейке "Количество") ожидаемое значение не было найдено.
+
+ДАННЫЕ ЛОГА
+Step (And I go to line in "BasisesTree" table) has not been executed. The line of the tree #2910
+    | 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+    | 'TRY'      | '350,00' | '7,000'    | 'Shirt (36/Red)'   | 'pcs'  | 'No'  |
+Value <7,000 > from <Quantity > column is not found.
+----------------
+3. Ошибка произошла при выполнении обработки нажатия на кнопку открытия "Счета" ("Sales invoice") - причина: не была успешно обработана предыдущая команда = выполнение действий по нажатию на кнопку "Post"...
+
+ДАННЫЕ ЛОГА
+07.10.2021 15:03:44. Step: And I click "Post" button
+    07.10.2021 15:03:44. Step: And I click "Sales invoice" button
+Step (And I click "Sales invoice" button) has not been executed. The line of the tree #3242
+----------------
+4. Ошибка произошла при переходе к строке таблицы "BasisesTree" по причине отсутствия или несоответствия данных указанной строки - т.е. либо такой строки не было в ТЧ, либо данные каких либо реквизитов были другими... Либо, строк с такими данными больше чем 1 строка и тест не смог выбрать нужную...
+
+ДАННЫЕ ЛОГА
+Step (And I go to line in "BasisesTree" table) has not been executed. The line of the tree #4252
+    | 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+    | 'TRY'      | '100,00' | '10,000'   | 'Dress (S/Yellow)' | 'pcs'  |
+----------------
+5. Ошибка произошла после закрытия формы объкта и попытки позиционирования в форме списка. Вероятно, форма списка была не доступна - возможная причина = не закрылась форма объекта. Например, что то на форме изменилось и система просила пользователя принять решение о сохранении данных...
+
+ДАННЫЕ ЛОГА
+ 07.10.2021 15:24:19. Step: And I click the button named "FormPostAndClose"
+    07.10.2021 15:24:19. Step: And I go to line in "List" table
+      | 'Number'                               |
+      | '$$NumberRetailSalesReceipt01541491$$' |
+Step (And I go to line in "List" table) has not been executed. The line of the tree #2808
+----------------
+6. Ошибка произошла после обработки команды формирования документа. В Созданном Документе в ТЧ "BasisesTree" ожидалось количество строк: "?????" 0 - тут, вероятно, "?????" лишнее = т.е. описка / ошибка в описании шага... Так как вероятно надо было сраснивать что в новом документе количество строк = "0"...
+
+ДАННЫЕ ЛОГА
+07.10.2021 15:24:05. Step: Then the number of "BasisesTree" table lines is "?????" 0
+Step (Then the number of "BasisesTree" table lines is "?????" 0) has not been executed. The line of the tree #1816
+----------------
+7. Ошибка произошла после формирования вывода отчета - ожидалось содержимое ТЧ отчета не такое, как было выведено тестом... Т.е. не содердимое таблицы отчета не совпало с эталонными значениями таблицы в тесте.
+
+ДАННЫЕ ЛОГА
+Step (And "ResultTable" spreadsheet document contains lines:) has not been executed. The line of the tree #1311
+----------------

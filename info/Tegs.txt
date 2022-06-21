@@ -1,0 +1,7 @@
+@Tree
+@ExportScenarios
+@IgnoreOnCIMainBuild
+
+@screenshot
+@recordvideo
+@быстрыеѕроверки
