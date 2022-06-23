@@ -1,0 +1,2 @@
+﻿"Ref","Date","ProportionOfPayment","DuePeriod","Amount","CalculationType"
+"e1cib/data/Document.SalesOrder?ref=bf3f5cf3706d771011ecf0a37f87701c","27.06.2022 0:00:00","100","7","","Enum.CalculationTypes.PostShipmentCredit"

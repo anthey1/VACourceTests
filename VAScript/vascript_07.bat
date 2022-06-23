@@ -1,0 +1,2 @@
+"C:\Program Files\1cv8\8.3.21.1302\bin\1cv8c" /N"CI" /P"CI" /TestManager /Execute "E:\tools\tools\OneScript\lib\vanessa-automation\vanessa-automation.epf" /IBConnectionString "File=""E:\anna\1C_learning\VA_Test_db\04\TestIRP"";" /C"StartFeaturePlayer;QuietInstallVanessaExt;DisableLoadConfig;ClearStepsCache;VAParams=E:\anna\1C_learning\VAParams_auto\VAParams.json"
+allure generate --clean E:\anna\1C_learning\Allire_result && allure open
